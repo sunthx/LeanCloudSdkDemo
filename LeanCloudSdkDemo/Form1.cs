@@ -75,7 +75,7 @@ namespace LeanCloudSdkDemo
         private async void button1_Click(object sender, EventArgs e)
         {
             AVClient.Initialize(txtAppId.Text, txtAppKey.Text);
-//            await AddTestData();
+            await AddTestData();
             Message("Initialize Ok");
         }
 
@@ -238,10 +238,13 @@ namespace LeanCloudSdkDemo
             Clear();
 
             string[] conditions = {"Tom", "Jim"};
-            AVQuery<AVObject> query = new AVQuery<AVObject>(_queryClassName);
-            var result = await query.WhereContainedIn("name", conditions).FindAsync();
+//            AVQuery<AVObject> query = new AVQuery<AVObject>(_queryClassName);
+//            var result = await query.WhereContainedIn("name", conditions).FindAsync();
 
-            Message($"[Query] WhereContainedIn('name', 'J') 满足条件的个数 : {result.Count()}", true);
+            string cql = $"select * from {_queryClassName} where name in ('Tom','Jim')";
+            var result = await AVQuery<AVObject>.DoCloudQuery(cql);
+
+            Message($"[Query] WhereContainedIn 满足条件的个数 : {result.Count()}", true);
         }
 
         private async void button15_Click(object sender, EventArgs e)
@@ -250,9 +253,13 @@ namespace LeanCloudSdkDemo
 
             string[] conditions = {"Tom", "Jim"};
 
-            AVQuery<AVObject> query = new AVQuery<AVObject>(_queryClassName);
-            var result = await query.WhereNotContainedIn("name", conditions).FindAsync();
-            Message($"[Query] WhereNotContainedIn('name', 'J') 满足条件的个数 : {result.Count()}", true);
+            //            AVQuery<AVObject> query = new AVQuery<AVObject>(_queryClassName);
+            //            var result = await query.WhereNotContainedIn("name", conditions).FindAsync();
+
+            string cql = $"select * from {_queryClassName} where name not in ('Tom','Jim')";
+            var result = await AVQuery<AVObject>.DoCloudQuery(cql);
+
+            Message($"[Query] WhereContainedIn 满足条件的个数 : {result.Count()}", true);
         }
 
         #endregion
