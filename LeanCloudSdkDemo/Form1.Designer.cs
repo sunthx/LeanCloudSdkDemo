@@ -50,6 +50,9 @@
             this.button15 = new System.Windows.Forms.Button();
             this.button16 = new System.Windows.Forms.Button();
             this.button17 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.button18 = new System.Windows.Forms.Button();
+            this.button19 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -164,7 +167,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(151, 41);
             this.button10.TabIndex = 4;
-            this.button10.Text = "ContainIn";
+            this.button10.Text = "ContainIn (!)";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -244,7 +247,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(151, 41);
             this.button15.TabIndex = 4;
-            this.button15.Text = "NotContainIn";
+            this.button15.Text = "NotContainIn (!)";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -268,11 +271,44 @@
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 566);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(671, 12);
+            this.label2.TabIndex = 7;
+            this.label2.Text = "---------------------------------------------------------------------------------" +
+    "------------------------------";
+            // 
+            // button18
+            // 
+            this.button18.Location = new System.Drawing.Point(15, 590);
+            this.button18.Name = "button18";
+            this.button18.Size = new System.Drawing.Size(148, 44);
+            this.button18.TabIndex = 8;
+            this.button18.Text = "上传文件";
+            this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
+            // 
+            // button19
+            // 
+            this.button19.Location = new System.Drawing.Point(179, 590);
+            this.button19.Name = "button19";
+            this.button19.Size = new System.Drawing.Size(148, 44);
+            this.button19.TabIndex = 8;
+            this.button19.Text = "下载文件 (!)";
+            this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(692, 568);
+            this.ClientSize = new System.Drawing.Size(692, 669);
+            this.Controls.Add(this.button19);
+            this.Controls.Add(this.button18);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button13);
@@ -331,6 +367,9 @@
         private System.Windows.Forms.Button button15;
         private System.Windows.Forms.Button button16;
         private System.Windows.Forms.Button button17;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button19;
     }
 }
 

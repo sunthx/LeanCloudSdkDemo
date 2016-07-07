@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -130,7 +131,7 @@ namespace LeanCloudSdkDemo
 
         #endregion
 
-        // ---- 查询
+        #region Query
 
         private async void button5_Click(object sender, EventArgs e)
         {
@@ -236,7 +237,7 @@ namespace LeanCloudSdkDemo
         {
             Clear();
 
-            string[] conditions = {"Tom","Jim"};
+            string[] conditions = {"Tom", "Jim"};
             AVQuery<AVObject> query = new AVQuery<AVObject>(_queryClassName);
             var result = await query.WhereContainedIn("name", conditions).FindAsync();
 
@@ -247,12 +248,55 @@ namespace LeanCloudSdkDemo
         {
             Clear();
 
-            string[] conditions = { "Tom", "Jim" };
+            string[] conditions = {"Tom", "Jim"};
 
             AVQuery<AVObject> query = new AVQuery<AVObject>(_queryClassName);
             var result = await query.WhereNotContainedIn("name", conditions).FindAsync();
             Message($"[Query] WhereNotContainedIn('name', 'J') 满足条件的个数 : {result.Count()}", true);
         }
 
+        #endregion
+
+        #region File
+
+        private async void button18_Click(object sender, EventArgs e)
+        {
+            string fileName = "demo.png";
+
+            //  通过文件流获得AVFile对象
+            //            byte[] data;
+            //
+            //            using (FileStream fs = new FileStream(fileName, FileMode.Open))
+            //            {
+            //                using (BinaryReader br = new BinaryReader(fs))
+            //                    data = br.ReadBytes((int) fs.Length);
+            //            }
+            //
+            //            AVFile localFile = new AVFile("demo.png",data);
+
+            AVFile localFile = AVFile.CreateFileWithLocalPath(fileName, fileName);
+            await localFile.SaveAsync();
+            Message($"[Upload File] File ObjectId = {localFile.ObjectId}");
+        }
+
+        private async void button19_Click(object sender, EventArgs e)
+        {
+            string objectId = "577e09a96be3ff006a245790";
+            await AVFile.GetFileWithObjectIdAsync(objectId).ContinueWith(t =>
+            {
+                var file = t.Result;
+                file.DownloadAsync().ContinueWith(s =>
+                {
+                    var dataByte = file.DataByte;
+                    using (BinaryWriter bw = new BinaryWriter(File.Open("demo2.png", FileMode.OpenOrCreate)))
+                    {
+                        bw.Write(dataByte);
+                        bw.Close();
+                    }
+                });
+            });
+        }
+
+        #endregion
     }
 }
